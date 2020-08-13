@@ -14,7 +14,9 @@ import { useCookies } from 'react-cookie';
 import { User } from '../types';
 import CincoPorques from './CincoPorques/CincoPorques';
 import TabelaChecks from './TabelaChecks/TabelaChecks';
+import TabelaOperarios from './TabelaOperarios/TabelaOperarios';
 import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 const App = () => {
     const classes = stylesDashboard();
@@ -72,6 +74,9 @@ const App = () => {
                                     </Route>
                                     <Route path="/checks">
                                         <TabelaChecks />
+                                    </Route>
+                                    <Route path="/operarios">
+                                        <TabelaOperarios />
                                     </Route>
                                     <Route path="/">
                                         <Dashboard />

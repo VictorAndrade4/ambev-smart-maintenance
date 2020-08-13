@@ -14,6 +14,15 @@ export interface Equipamento {
     frequency: number;
     period: string;
 }
+export interface Operarios {
+    _id: string;
+    password: string;
+    name: string;
+    userId: string;
+    field: string;
+    admin: boolean;
+
+}
 
 export interface Check {
     date: string;

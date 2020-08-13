@@ -50,6 +50,12 @@ export const adminListItems = (
             </ListItemIcon>
             <ListItemText primary="Cadastro de Checks" />
         </ListItem>
+        <ListItem button component={Link} to="/operarios">
+            <ListItemIcon>
+                <PlaylistAddCheckIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cadastro de Operarios" />
+        </ListItem>
         <ListItem button>
             <ListItemIcon>
                 <BarChartIcon />

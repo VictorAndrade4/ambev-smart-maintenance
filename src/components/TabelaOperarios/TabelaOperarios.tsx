@@ -4,7 +4,7 @@ import MaterialTable, { Column } from 'material-table';
 import tableIcons from './tableIcons';
 import UserData from '../../contexts/UserData';
 import axios from 'axios';
-import { Equipamento } from '../../types';
+import { Operarios } from '../../types';
 import { Container } from '@material-ui/core';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import Edit from '@material-ui/icons/Edit';
@@ -12,12 +12,12 @@ import AddIcon from '@material-ui/icons/Add';
 import Alert from '@material-ui/lab/Alert';
 import stylesTabelaChecks from '../../styles/tabelaChecks';
 import { isNullOrUndefined } from 'util';
-import CheckDetalhesDialog from './CheckDetalhes';
+import OperariosDetalhesDialog from './OperariosDetalhes';
 import ViewListIcon from '@material-ui/icons/ViewList';
-
+import trataRequisicao from '../../utils/trataRequisicao';
 interface TableState {
-    columns: Array<Column<Equipamento>>;
-    rows: Equipamento[];
+    columns: Array<Column<Operarios>>;
+    rows: Operarios[];
 }
 
 const TabelaChecks = () => {
@@ -30,37 +30,37 @@ const TabelaChecks = () => {
     const [reloadComponent, setReload] = useState(false);
 
     // CheckDetalhes
-    const [selectedEquipamento, setSelectedEquipamento] = useState<Equipamento | undefined>(undefined);
+    const [selectedOperarios, setSelectedOperarios] = useState<Operarios | undefined>(undefined);
     const [openDialog, setOpenDialog] = useState(false);
     const [url, setUrl] = useState<string>('');
 
     const [tableState, setTableState] = useState<TableState>({
         columns: [
             { title: 'Nome', field: 'name' },
-            { title: 'Criado em', field: 'date' },
+            { title: 'Admin?', field: 'admin' },
             { title: 'Área', field: 'field' },
-            { title: 'Período', field: 'period' },
-            { title: 'Frequência', field: 'frequency' },
+            { title: 'ID', field: 'userId' },
         ],
         rows: [],
     });
 
     const handleCloseDialog = () => {
-        setSelectedEquipamento(undefined);
+        setSelectedOperarios(undefined);
         setOpenDialog(false);
         setReload(!reloadComponent);
     };
 
     useEffect(() => {
-        axios.get(`/machines/index?field=${userData.user.field}`).then((response) => {
-            setTableState({ ...tableState, rows: response.data as Equipamento[] });
+        axios.get(`/users/index?field=${userData.user.field}`).then((response) => {
+            const operarios = trataRequisicao<Operarios>('Operarios', response);
+            setTableState({ ...tableState, rows: operarios });
         });
     }, [reloadComponent]);
 
     return (
         <Container maxWidth="lg">
             <MaterialTable
-                title="Checklists"
+                title="Operarios"
                 columns={tableState.columns}
                 data={tableState.rows}
                 icons={tableIcons}
@@ -70,29 +70,19 @@ const TabelaChecks = () => {
                         tooltip: 'Add',
                         isFreeAction: true,
                         onClick: () => {
-                            setSelectedEquipamento(undefined);
+                            setSelectedOperarios(undefined);
                             setOpenDialog(true);
-                            setUrl('/machines/create');
+                            setUrl('/users/create');
                         },
                     },
-                    (rowData) => ({
-                        icon: () => <ViewListIcon />,
-                        tooltip: '.csv',
-                        onClick: () => {
-                            window.open(
-                                `${axios.defaults.baseURL}/backup?name=${rowData.name}&type=checks&field=${userData.user.field}`
-                            );
-                        },
-                    }),
+
                     (rowData) => ({
                         icon: () => <Edit />,
                         tooltip: 'Editar',
                         onClick: () => {
-                            setSelectedEquipamento(rowData);
+                            setSelectedOperarios(rowData);
                             setOpenDialog(true);
-                            setUrl(
-                                `/machines/modify?name=${selectedEquipamento?.name}&period=${selectedEquipamento?.period}&frequency=${selectedEquipamento?.frequency}`
-                            );
+                            setUrl(`/users/delete/${rowData["_id"]}`);
                         },
                     }),
                     (rowData) => ({
@@ -100,12 +90,10 @@ const TabelaChecks = () => {
                         tooltip: 'Deletar',
                         onClick: () => {
                             axios
-                                .delete(
-                                    `/machines/delete?name=${rowData.name}&period=${rowData.period}&frequency=${rowData.frequency}`
-                                )
+                                .delete(`/users/delete/${rowData["_id"]}`)
                                 .then(() => {
                                     setAlertIsOn(true);
-                                    setSuccesMessage('Check deletado com sucesso!');
+                                    setSuccesMessage('Operário deletado com sucesso!');
                                     setFailMessage(undefined);
                                     setReload(!reloadComponent);
                                 })
@@ -128,7 +116,7 @@ const TabelaChecks = () => {
             >
                 {failMessage || successMessage}
             </Alert>
-            <CheckDetalhesDialog equip={selectedEquipamento} open={openDialog} onClose={handleCloseDialog} url={url} />
+            <OperariosDetalhesDialog operario={selectedOperarios} open={openDialog} onClose={handleCloseDialog} url={url} />
         </Container>
     );
 };
