@@ -43,6 +43,7 @@ export interface User {
 }
 
 export interface Relatorio {
+    _id: string;
     period: string;
     frequency: number;
     date: Date;

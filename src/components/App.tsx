@@ -15,6 +15,7 @@ import { User } from '../types';
 import CincoPorques from './CincoPorques/CincoPorques';
 import TabelaChecks from './TabelaChecks/TabelaChecks';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FiltroLimpezaInspecao from './FiltroLimpezaInspecao/FiltroLimpezaInspecao';
 
 const App = () => {
     const classes = stylesDashboard();
@@ -72,6 +73,9 @@ const App = () => {
                                     </Route>
                                     <Route path="/checks">
                                         <TabelaChecks />
+                                    </Route>
+                                    <Route path="/filtro-limp-insp">
+                                        <FiltroLimpezaInspecao />
                                     </Route>
                                     <Route path="/">
                                         <Dashboard />

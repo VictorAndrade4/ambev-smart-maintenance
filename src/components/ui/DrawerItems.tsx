@@ -5,11 +5,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import Filter5Icon from '@material-ui/icons/Filter5';
-import BarChartIcon from '@material-ui/icons/BarChart';
 import BuildIcon from '@material-ui/icons/Build';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PermDataSettingIcon from '@material-ui/icons/PermDataSetting';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import TocIcon from '@material-ui/icons/Toc';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -50,11 +50,11 @@ export const adminListItems = (
             </ListItemIcon>
             <ListItemText primary="Cadastro de Checks" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/filtro-limp-insp">
             <ListItemIcon>
-                <BarChartIcon />
+                <TocIcon />
             </ListItemIcon>
-            <ListItemText primary="Report Importante" />
+            <ListItemText primary="Limpeza e Inspeção" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
