@@ -46,133 +46,26 @@ const ListaProcedimentos: FC<AllProps> = (props: AllProps) => {
     }, [props.procedures]);
 
     return (
-        <Container maxWidth="lg">
-            <List>
-                {props.procedures?.map((value, index) => (
-                    <Container
-                        className={clsx(classes.listItem, index % 2 === 0 && classes.listItemColored)}
-                        key={`item-lista-procedimento-${index}`}
-                    >
-                        <Title>{`Procedimento ${index + 1}`}</Title>
-                        <TextField
-                            className={classes.textFieldLista}
-                            variant="outlined"
-                            label="Descrição"
-                            multiline
-                            value={value.description || ' '}
-                            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                const newProcedures = [...props.procedures];
-                                newProcedures[index] = {
-                                    ...newProcedures[index],
-                                    description: event.currentTarget.value,
-                                };
-                                props.handleChangeProcedures(newProcedures);
-                            }}
-                        />
-                        <TextField
-                            className={classes.textFieldLista}
-                            variant="outlined"
-                            label="Método"
-                            multiline
-                            value={value.method || ' '}
-                            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                const newProcedures = [...props.procedures];
-                                newProcedures[index] = {
-                                    ...newProcedures[index],
-                                    method: event.currentTarget.value,
-                                };
-                                props.handleChangeProcedures(newProcedures);
-                            }}
-                        />
-                        <TextField
-                            className={classes.textFieldLista}
-                            variant="outlined"
-                            label="Localização da máquina"
-                            value={value.location}
-                            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                const newProcedures = [...props.procedures];
-                                newProcedures[index] = {
-                                    ...newProcedures[index],
-                                    location: event.currentTarget.value,
-                                };
-                                props.handleChangeProcedures(newProcedures);
-                            }}
-                        />
-                        <TextField
-                            className={classes.textFieldSecondary}
-                            variant="outlined"
-                            label="Pontos"
-                            type="number"
-                            value={value.point}
-                            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                const newProcedures = [...props.procedures];
-                                newProcedures[index] = {
-                                    ...newProcedures[index],
-                                    point: +event.currentTarget.value,
-                                };
-                                props.handleChangeProcedures(newProcedures);
-                            }}
-                        />
-                        <TextField
-                            className={classes.textFieldSecondary}
-                            variant="outlined"
-                            label="Item"
-                            value={value.item || ' '}
-                            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                const newProcedures = [...props.procedures];
-                                newProcedures[index] = {
-                                    ...newProcedures[index],
-                                    item: event.currentTarget.value,
-                                };
-                                props.handleChangeProcedures(newProcedures);
-                            }}
-                        />
-                        <FormControl className={classes.textFieldSecondary} component="fieldset">
-                            <FormLabel component="legend">Condição da Máquina:</FormLabel>
-                            <RadioGroup
-                                value={value.condition}
-                                onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                    const newProcedures = [...props.procedures];
-                                    newProcedures[index] = {
-                                        ...newProcedures[index],
-                                        condition: event.currentTarget.value as 'PARADA' | 'RODANDO',
-                                    };
-                                    props.handleChangeProcedures(newProcedures);
-                                }}
-                            >
-                                <FormControlLabel label="Parada" control={<Radio />} value="PARADA" />
-                                <FormControlLabel label="Rodando" control={<Radio />} value="RODANDO" />
-                            </RadioGroup>
-                        </FormControl>
-                        <IconButton
-                            onClick={() => {
-                                const newProcedures = [...props.procedures];
-                                newProcedures.splice(index, 1);
-                                props.handleChangeProcedures(newProcedures);
-                            }}
-                            edge="start"
-                            aria-label="comments"
-                        >
-                            <Typography>Deletar</Typography>
-                            <DeleteForeverIcon />
-                        </IconButton>
-                    </Container>
-                ))}
-
-                {/** Sessão de add novo procedimento*/}
-                <Container className={classes.listItem}>
-                    <Title>Adicionar Novo Procedimento</Title>
+        <List>
+            {props.procedures?.map((value, index) => (
+                <Container
+                    className={clsx(classes.listItem, index % 2 === 0 && classes.listItemColored)}
+                    key={`item-lista-procedimento-${index}`}
+                >
+                    <Title>{`Procedimento ${index + 1}`}</Title>
                     <TextField
                         className={classes.textFieldLista}
                         variant="outlined"
                         label="Descrição"
                         multiline
-                        value={procedureAdded.description || ' '}
+                        value={value.description || ' '}
                         onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                            setProcedureAdded({
-                                ...procedureAdded,
+                            const newProcedures = [...props.procedures];
+                            newProcedures[index] = {
+                                ...newProcedures[index],
                                 description: event.currentTarget.value,
-                            });
+                            };
+                            props.handleChangeProcedures(newProcedures);
                         }}
                     />
                     <TextField
@@ -180,24 +73,28 @@ const ListaProcedimentos: FC<AllProps> = (props: AllProps) => {
                         variant="outlined"
                         label="Método"
                         multiline
-                        value={procedureAdded.method || ' '}
+                        value={value.method || ' '}
                         onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                            setProcedureAdded({
-                                ...procedureAdded,
+                            const newProcedures = [...props.procedures];
+                            newProcedures[index] = {
+                                ...newProcedures[index],
                                 method: event.currentTarget.value,
-                            });
+                            };
+                            props.handleChangeProcedures(newProcedures);
                         }}
                     />
                     <TextField
                         className={classes.textFieldLista}
                         variant="outlined"
                         label="Localização da máquina"
-                        value={procedureAdded.location || ' '}
+                        value={value.location}
                         onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                            setProcedureAdded({
-                                ...procedureAdded,
+                            const newProcedures = [...props.procedures];
+                            newProcedures[index] = {
+                                ...newProcedures[index],
                                 location: event.currentTarget.value,
-                            });
+                            };
+                            props.handleChangeProcedures(newProcedures);
                         }}
                     />
                     <TextField
@@ -205,35 +102,41 @@ const ListaProcedimentos: FC<AllProps> = (props: AllProps) => {
                         variant="outlined"
                         label="Pontos"
                         type="number"
-                        value={procedureAdded.point || 0}
+                        value={value.point}
                         onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                            setProcedureAdded({
-                                ...procedureAdded,
+                            const newProcedures = [...props.procedures];
+                            newProcedures[index] = {
+                                ...newProcedures[index],
                                 point: +event.currentTarget.value,
-                            });
+                            };
+                            props.handleChangeProcedures(newProcedures);
                         }}
                     />
                     <TextField
                         className={classes.textFieldSecondary}
                         variant="outlined"
                         label="Item"
-                        value={procedureAdded.item || ' '}
+                        value={value.item || ' '}
                         onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                            setProcedureAdded({
-                                ...procedureAdded,
+                            const newProcedures = [...props.procedures];
+                            newProcedures[index] = {
+                                ...newProcedures[index],
                                 item: event.currentTarget.value,
-                            });
+                            };
+                            props.handleChangeProcedures(newProcedures);
                         }}
                     />
                     <FormControl className={classes.textFieldSecondary} component="fieldset">
                         <FormLabel component="legend">Condição da Máquina:</FormLabel>
                         <RadioGroup
-                            value={procedureAdded.condition}
+                            value={value.condition}
                             onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                                setProcedureAdded({
-                                    ...procedureAdded,
+                                const newProcedures = [...props.procedures];
+                                newProcedures[index] = {
+                                    ...newProcedures[index],
                                     condition: event.currentTarget.value as 'PARADA' | 'RODANDO',
-                                });
+                                };
+                                props.handleChangeProcedures(newProcedures);
                             }}
                         >
                             <FormControlLabel label="Parada" control={<Radio />} value="PARADA" />
@@ -243,18 +146,113 @@ const ListaProcedimentos: FC<AllProps> = (props: AllProps) => {
                     <IconButton
                         onClick={() => {
                             const newProcedures = [...props.procedures];
-                            newProcedures.push(procedureAdded);
+                            newProcedures.splice(index, 1);
                             props.handleChangeProcedures(newProcedures);
                         }}
                         edge="start"
                         aria-label="comments"
                     >
-                        <Typography>Adicionar</Typography>
-                        <AddCircleIcon />
+                        <Typography>Deletar</Typography>
+                        <DeleteForeverIcon />
                     </IconButton>
                 </Container>
-            </List>
-        </Container>
+            ))}
+
+            {/** Sessão de add novo procedimento*/}
+            <Container className={classes.listItem}>
+                <Title>Adicionar Novo Procedimento</Title>
+                <TextField
+                    className={classes.textFieldLista}
+                    variant="outlined"
+                    label="Descrição"
+                    multiline
+                    value={procedureAdded.description || ' '}
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                        setProcedureAdded({
+                            ...procedureAdded,
+                            description: event.currentTarget.value,
+                        });
+                    }}
+                />
+                <TextField
+                    className={classes.textFieldLista}
+                    variant="outlined"
+                    label="Método"
+                    multiline
+                    value={procedureAdded.method || ' '}
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                        setProcedureAdded({
+                            ...procedureAdded,
+                            method: event.currentTarget.value,
+                        });
+                    }}
+                />
+                <TextField
+                    className={classes.textFieldLista}
+                    variant="outlined"
+                    label="Localização da máquina"
+                    value={procedureAdded.location || ' '}
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                        setProcedureAdded({
+                            ...procedureAdded,
+                            location: event.currentTarget.value,
+                        });
+                    }}
+                />
+                <TextField
+                    className={classes.textFieldSecondary}
+                    variant="outlined"
+                    label="Pontos"
+                    type="number"
+                    value={procedureAdded.point || 0}
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                        setProcedureAdded({
+                            ...procedureAdded,
+                            point: +event.currentTarget.value,
+                        });
+                    }}
+                />
+                <TextField
+                    className={classes.textFieldSecondary}
+                    variant="outlined"
+                    label="Item"
+                    value={procedureAdded.item || ' '}
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                        setProcedureAdded({
+                            ...procedureAdded,
+                            item: event.currentTarget.value,
+                        });
+                    }}
+                />
+                <FormControl className={classes.textFieldSecondary} component="fieldset">
+                    <FormLabel component="legend">Condição da Máquina:</FormLabel>
+                    <RadioGroup
+                        value={procedureAdded.condition}
+                        onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                            setProcedureAdded({
+                                ...procedureAdded,
+                                condition: event.currentTarget.value as 'PARADA' | 'RODANDO',
+                            });
+                        }}
+                    >
+                        <FormControlLabel label="Parada" control={<Radio />} value="PARADA" />
+                        <FormControlLabel label="Rodando" control={<Radio />} value="RODANDO" />
+                    </RadioGroup>
+                </FormControl>
+                <IconButton
+                    onClick={() => {
+                        const newProcedures = [...props.procedures];
+                        newProcedures.push(procedureAdded);
+                        props.handleChangeProcedures(newProcedures);
+                    }}
+                    edge="start"
+                    aria-label="comments"
+                >
+                    <Typography>Adicionar</Typography>
+                    <AddCircleIcon />
+                </IconButton>
+            </Container>
+        </List>
     );
 };
 

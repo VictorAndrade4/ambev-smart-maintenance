@@ -16,6 +16,7 @@ import CincoPorques from './CincoPorques/CincoPorques';
 import TabelaChecks from './TabelaChecks/TabelaChecks';
 import TabelaOperarios from './TabelaOperarios/TabelaOperarios';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FiltroLimpezaInspecao from './FiltroLimpezaInspecao/FiltroLimpezaInspecao';
 
 
 const App = () => {
@@ -77,6 +78,8 @@ const App = () => {
                                     </Route>
                                     <Route path="/operarios">
                                         <TabelaOperarios />
+                                    <Route path="/filtro-limp-insp">
+                                        <FiltroLimpezaInspecao />
                                     </Route>
                                     <Route path="/">
                                         <Dashboard />

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useState, useContext, useEffect } from 'react';
 import MaterialTable, { Column } from 'material-table';
-import tableIcons from './tableIcons';
+import tableIcons from '../ui/tableIcons';
 import UserData from '../../contexts/UserData';
 import axios from 'axios';
 import { Equipamento } from '../../types';
