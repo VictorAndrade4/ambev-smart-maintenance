@@ -7,6 +7,7 @@ import Title from '../ui/Title';
 import Alert from '@material-ui/lab/Alert';
 import stylesFiltroCincoPorques from '../../styles/filtroCincoPorques';
 import TabelaCincoPorques from './TabelaCincoPorques';
+import ImportCsv from '../ui/ImportCsv';
 
 export interface StateFiltro5W {
     initialDate: string;
@@ -97,7 +98,7 @@ const FiltroCincoPorques = () => {
                 />
             )}
             <Button onClick={handleSearchButton} variant="outlined" color="primary" className={classes.searchButton}>
-                Pesquisar
+                Mostrar resultados
             </Button>
 
             <Button
@@ -115,9 +116,9 @@ const FiltroCincoPorques = () => {
                 color="secondary"
                 className={classes.searchButton}
             >
-                Exportar para .csv
+                Exportar resultado para .csv
             </Button>
-
+            <ImportCsv url="/fileupload/5w/" />
             <Divider />
             {state.result.length > 0 && (
                 <TabelaCincoPorques cincoPorquesInfo={state.result} reloadTable={handleSearchButton} />

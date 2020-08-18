@@ -14,6 +14,7 @@ import stylesTabelaChecks from '../../styles/tabelaChecks';
 import { isNullOrUndefined } from 'util';
 import CheckDetalhesDialog from './CheckDetalhes';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import ImportCsv from '../ui/ImportCsv';
 
 interface TableState {
     columns: Array<Column<Equipamento>>;
@@ -101,7 +102,7 @@ const TabelaChecks = () => {
                         tooltip: 'Deletar',
                         onClick: () => {
                             axios
-                                .delete(
+                                .get(
                                     `/machines/delete?name=${rowData.name}&period=${rowData.period}&frequency=${rowData.frequency}`
                                 )
                                 .then(() => {
@@ -119,6 +120,7 @@ const TabelaChecks = () => {
                     }),
                 ]}
             />
+            <ImportCsv url={`/fileupload/?field=${userData.user.field}`} reloadCallback={setReload} />
             <Alert
                 onClose={() => {
                     setAlertIsOn(false);
