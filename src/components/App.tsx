@@ -18,6 +18,7 @@ import TabelaOperarios from './TabelaOperarios/TabelaOperarios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FiltroLimpezaInspecao from './FiltroLimpezaInspecao/FiltroLimpezaInspecao';
 import FiltroCincoPorques from './FiltroCincoPorques/FiltroCincoPorques';
+import Cadastrar from './Cadastrar/Cadastrar';
 
 const App = () => {
     const classes = stylesDashboard();
@@ -56,6 +57,9 @@ const App = () => {
                 <Switch>
                     <Route path="/login">
                         <Login />
+                    </Route>
+                    <Route path="/cadastrar">
+                        <Cadastrar />
                     </Route>
                     {isNullOrUndefined(cookies.user?.userId) ? (
                         <Redirect to="/login" />

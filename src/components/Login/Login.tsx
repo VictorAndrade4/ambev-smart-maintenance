@@ -105,7 +105,7 @@ const Login = () => {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="/cadastro" variant="body2">
+                            <Link href="/cadastrar" variant="body2">
                                 {'Cadastrar-se'}
                             </Link>
                         </Grid>
