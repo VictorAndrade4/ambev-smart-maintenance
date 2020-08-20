@@ -21,6 +21,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [login, setLogin] = useState('');
     const [error, setError] = useState(false);
+    const [forgotPassword, setForgotPassword] = useState(false);
     const history = useHistory();
 
     const userData = useContext(UserData);
@@ -33,7 +34,13 @@ const Login = () => {
             .post('/session/login', { userId: login, password: password })
             .then((response) => {
                 setError(false);
-                userData.setUser({ userId: login, admin: response.data.admin, field: response.data.field });
+                userData.setUser({
+                    userId: login,
+                    admin: response.data.admin,
+                    field: response.data.field,
+                    name: response.data.name,
+                    _id: response.data._id,
+                });
                 history.push('/');
             })
             .catch((e) => {
@@ -47,6 +54,9 @@ const Login = () => {
     };
     const handleLoginChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setLogin(event.currentTarget.value.replace(' ', ''));
+    };
+    const handleForgotPassword = () => {
+        setForgotPassword(true);
     };
 
     return (
@@ -100,7 +110,7 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="/suporte" variant="body2">
+                            <Link onClick={handleForgotPassword} variant="body2">
                                 Esqueceu a senha?
                             </Link>
                         </Grid>
@@ -115,6 +125,13 @@ const Login = () => {
             <Box mt={8}>
                 <Copyright />
             </Box>
+            {forgotPassword && (
+                <Alert variant="filled" severity="info">
+                    <AlertTitle>Esqueceu a senha?</AlertTitle>
+                    Comunique a um administrador e peça para o mesmo mudar sua senha. Após o reset, você pode redefinir
+                    sua senha entrando 'Editar Perfil'.
+                </Alert>
+            )}
         </Container>
     );
 };

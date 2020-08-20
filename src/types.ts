@@ -48,6 +48,8 @@ export interface User {
     userId: string | undefined;
     admin: boolean;
     field: string | undefined;
+    name: string | undefined;
+    _id: string | undefined;
 }
 
 export interface Relatorio {
