@@ -32,28 +32,26 @@ const OperarioDetalhesDialog: FC<AllProps> = (props: AllProps) => {
     const userData = useContext(UserData);
     const [newOperario, setNewOperario] = useState((props.operario as Operarios) || ({} as Operarios));
 
-    const handleSaveButton = async () => {
-        const data: any = {
-            userId: newOperario.userId,
-            fields: [newOperario.field],
-            admin: newOperario.admin,
-            name: newOperario.name,
-            password: newOperario.password,
-        };
-
-        const response: any = await axios.post<Operarios[]>(props.url, data, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        if (response.status === 200) {
-            props.onClose();
-        }
+    const handleSaveButton = () => {
+        axios
+            .put(props.url, {
+                userId: newOperario.userId,
+                fields: [newOperario.field],
+                admin: newOperario.admin,
+                name: newOperario.name,
+                password: newOperario.password,
+            })
+            .then(() => {
+                props.onClose();
+            })
+            .catch((e) => {
+                console.error(e);
+            });
     };
 
     useEffect(() => {
         if (props.operario) {
-            setNewOperario({ ...props.operario as Operarios })
+            setNewOperario({ ...(props.operario as Operarios) });
         } else {
             setNewOperario({
                 admin: false,
@@ -74,7 +72,7 @@ const OperarioDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                     required
                     variant="outlined"
                     label="Nome do operário"
-                    value={newOperario?.name || ''}
+                    value={newOperario?.name || ' '}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                         setNewOperario({ ...newOperario, name: event.currentTarget.value });
                     }}
@@ -84,7 +82,7 @@ const OperarioDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                     required
                     variant="outlined"
                     label="ID do operário"
-                    value={newOperario?.userId || ''}
+                    value={newOperario?.userId || ' '}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                         setNewOperario({ ...newOperario, userId: event.currentTarget.value });
                     }}
@@ -94,8 +92,8 @@ const OperarioDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                     required
                     variant="outlined"
                     label="Senha"
-                    type="number"
-                    value={newOperario?.password || ''}
+                    type="password"
+                    value={newOperario?.password || ' '}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                         setNewOperario({ ...newOperario, password: event.currentTarget.value });
                     }}
@@ -105,11 +103,9 @@ const OperarioDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                     <RadioGroup
                         value={newOperario?.admin}
                         onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-
                             setNewOperario({
                                 ...newOperario,
-                                admin: event.target.value === "true",
-
+                                admin: event.target.value === 'true',
                             });
                         }}
                     >

@@ -1,20 +1,18 @@
 /* eslint-disable react/display-name */
 import React, { useState, useContext, useEffect } from 'react';
 import MaterialTable, { Column } from 'material-table';
-import tableIcons from './tableIcons';
 import UserData from '../../contexts/UserData';
 import axios from 'axios';
 import { Operarios } from '../../types';
 import { Container } from '@material-ui/core';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import Edit from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
 import Alert from '@material-ui/lab/Alert';
 import stylesTabelaChecks from '../../styles/tabelaChecks';
 import { isNullOrUndefined } from 'util';
 import OperariosDetalhesDialog from './OperariosDetalhes';
-import ViewListIcon from '@material-ui/icons/ViewList';
 import trataRequisicao from '../../utils/trataRequisicao';
+import tableIcons from '../ui/tableIcons';
 interface TableState {
     columns: Array<Column<Operarios>>;
     rows: Operarios[];
@@ -65,24 +63,13 @@ const TabelaChecks = () => {
                 data={tableState.rows}
                 icons={tableIcons}
                 actions={[
-                    {
-                        icon: () => <AddIcon />,
-                        tooltip: 'Add',
-                        isFreeAction: true,
-                        onClick: () => {
-                            setSelectedOperarios(undefined);
-                            setOpenDialog(true);
-                            setUrl('/users/create');
-                        },
-                    },
-
                     (rowData) => ({
                         icon: () => <Edit />,
                         tooltip: 'Editar',
                         onClick: () => {
                             setSelectedOperarios(rowData);
                             setOpenDialog(true);
-                            setUrl(`/users/delete/${rowData["_id"]}`);
+                            setUrl(`/users/update/${rowData._id}`);
                         },
                     }),
                     (rowData) => ({
@@ -90,7 +77,7 @@ const TabelaChecks = () => {
                         tooltip: 'Deletar',
                         onClick: () => {
                             axios
-                                .delete(`/users/delete/${rowData["_id"]}`)
+                                .delete(`/users/delete/${rowData._id}`)
                                 .then(() => {
                                     setAlertIsOn(true);
                                     setSuccesMessage('Operário deletado com sucesso!');
@@ -116,7 +103,12 @@ const TabelaChecks = () => {
             >
                 {failMessage || successMessage}
             </Alert>
-            <OperariosDetalhesDialog operario={selectedOperarios} open={openDialog} onClose={handleCloseDialog} url={url} />
+            <OperariosDetalhesDialog
+                operario={selectedOperarios}
+                open={openDialog}
+                onClose={handleCloseDialog}
+                url={url}
+            />
         </Container>
     );
 };
