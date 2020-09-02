@@ -86,15 +86,13 @@ const TabelaChecks = () => {
                             window.open(`${url}/backup?name=${rowData.name}&type=checks&field=${userData.user.field}`);
                         },
                     }),
-                    (rowData) => ({
+                    (rowData: Equipamento) => ({
                         icon: () => <Edit />,
                         tooltip: 'Editar',
                         onClick: () => {
                             setSelectedEquipamento(rowData);
                             setOpenDialog(true);
-                            setUrl(
-                                `/machines/modify?name=${selectedEquipamento?.name}&period=${selectedEquipamento?.period}&frequency=${selectedEquipamento?.frequency}`
-                            );
+                            setUrl(`/machines/modify?_id=${rowData?._id}`);
                         },
                     }),
                     (rowData) => ({

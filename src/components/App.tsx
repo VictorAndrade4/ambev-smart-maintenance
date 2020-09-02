@@ -41,8 +41,8 @@ const App = () => {
     axios.defaults.headers = {
         'Content-Type': 'application/json',
     };
-    //axios.defaults.baseURL = 'http://localhost:3333';
-    axios.defaults.baseURL = 'https://cors-anywhere.herokuapp.com/http://3.17.151.221:3333';
+    axios.defaults.baseURL = 'http://localhost:3333';
+    //axios.defaults.baseURL = 'https://cors-anywhere.herokuapp.com/http://3.17.151.221:3333';
     axios.interceptors.response.use(
         (response) => {
             return response;

@@ -33,6 +33,7 @@ export interface Check {
     frequency: number;
     userId: string;
     period: string;
+    link?: string;
 }
 
 export interface Procedimento {

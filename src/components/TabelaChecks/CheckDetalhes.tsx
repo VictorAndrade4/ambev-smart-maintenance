@@ -32,9 +32,11 @@ type AllProps = PropsCheckDetalhes;
 const CheckDetalhesDialog: FC<AllProps> = (props: AllProps) => {
     const classes = stylesTabelaChecks();
     const userData = useContext(UserData);
-    const [newCheck, setNewCheck] = useState((props.equip as Check) || ({} as Check));
+    const [newCheck, setNewCheck] = useState<Check>((props.equip as Check) || ({} as Check));
 
     const handleSaveButton = () => {
+        console.log(props.equip);
+        console.log(newCheck);
         axios
             .post(props.url, newCheck)
             .then(() => {
@@ -64,9 +66,10 @@ const CheckDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                 procedures: [],
                 typeEquip: '',
                 userId: '',
+                link: '',
             } as Check);
         }
-    }, [props.equip]);
+    }, [props.equip, userData.user.field]);
 
     return (
         <Dialog maxWidth="lg" className={classes.dialogContainer} onClose={props.onClose} open={props.open}>
@@ -144,6 +147,21 @@ const CheckDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                         <FormControlLabel label="Mensal" control={<Radio />} value="mensal" />
                     </RadioGroup>
                 </FormControl>
+                <TextField
+                    label="Link para sharepoint"
+                    value={newCheck?.link || ' '}
+                    fullWidth
+                    variant="outlined"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                        setNewCheck({
+                            ...newCheck,
+                            link: event.currentTarget.value.trim(),
+                        });
+                    }}
+                />
                 <Divider />
                 <ListaProcedimentos procedures={newCheck.procedures} handleChangeProcedures={handleChangeProcedures} />
             </Container>
