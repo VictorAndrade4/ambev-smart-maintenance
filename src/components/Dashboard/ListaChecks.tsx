@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from '../ui/Title';
 import { Check } from '../../types';
 import axios from 'axios';
+import UserData from '../../contexts/UserData';
 
 const useStyles = makeStyles((theme) => ({
     seeMore: {
@@ -17,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListaChecksRecentes = () => {
+    const userData = useContext(UserData);
     const classes = useStyles();
     const [rows, setRows] = useState<Check[]>([]);
 
     useEffect(() => {
-        axios.get('/check/getLastFiveChecks/').then((response) => {
+        axios.get(`/check/getChecksOfTheDay?field=${userData.user.field}`).then((response) => {
             setRows(response.data);
         });
     }, []);
@@ -51,9 +53,6 @@ const ListaChecksRecentes = () => {
                     ))}
                 </TableBody>
             </Table>
-            <div className={classes.seeMore}>
-                <Link to="/filtro-limp-insp">Ver mais relatórios</Link>
-            </div>
         </React.Fragment>
     );
 };

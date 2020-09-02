@@ -191,7 +191,9 @@ const StepperLimpezaInspecao: FC<AllProps> = (props: AllProps) => {
                 </Container>
                 {props?.selectedEquipamento?.link && (
                     <Button
-                        href={`${props.selectedEquipamento?.link}`}
+                        onClick={() => {
+                            window.open(props.selectedEquipamento?.link);
+                        }}
                         className={classes.procedimentoButton}
                         variant="contained"
                         color="primary"

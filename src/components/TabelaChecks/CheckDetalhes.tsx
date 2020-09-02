@@ -66,7 +66,7 @@ const CheckDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                 procedures: [],
                 typeEquip: '',
                 userId: '',
-                link: '',
+                link: 'http://',
             } as Check);
         }
     }, [props.equip, userData.user.field]);
@@ -149,7 +149,7 @@ const CheckDetalhesDialog: FC<AllProps> = (props: AllProps) => {
                 </FormControl>
                 <TextField
                     label="Link para sharepoint"
-                    value={newCheck?.link || ' '}
+                    value={newCheck?.link || 'http://'}
                     fullWidth
                     variant="outlined"
                     InputLabelProps={{
