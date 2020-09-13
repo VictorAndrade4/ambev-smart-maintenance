@@ -6,6 +6,8 @@ import ListaChecksRecentes from './ListaChecks';
 import stylesDashboard from '../../styles/dashboard';
 import Copyright from '../ui/Copyright';
 import Title from '../ui/Title';
+import GraficoBarra from './GraficoBarra';
+import GraficoPie from './GraficoPie';
 
 const Dashboard = () => {
     const classes = stylesDashboard();
@@ -17,12 +19,17 @@ const Dashboard = () => {
             <Grid container spacing={3}>
                 <Grid item xs={12} md={8} lg={9}>
                     <Paper className={fixedHeightPaper}>
-                        <Typography>Aqui podemos deixar um gráfico, recados, etc... Ou então remover né</Typography>
+                        <GraficoBarra />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={3}>
                     <Paper className={fixedHeightPaper}>
                         <ContadorChecksDiario />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={8} lg={9}>
+                    <Paper className={fixedHeightPaper}>
+                        <GraficoPie />
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>

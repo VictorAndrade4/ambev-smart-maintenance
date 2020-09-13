@@ -76,7 +76,7 @@ const stylesDashboard = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 240,
+        height: 350,
     },
     drawerIcon: {
         marginRight: '10px',
