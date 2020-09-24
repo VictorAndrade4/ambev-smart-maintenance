@@ -20,6 +20,7 @@ import FiltroLimpezaInspecao from './FiltroLimpezaInspecao/FiltroLimpezaInspecao
 import FiltroCincoPorques from './FiltroCincoPorques/FiltroCincoPorques';
 import Cadastrar from './Cadastrar/Cadastrar';
 import UserProfileDetails from './UserProfileDetails/UserProfileDetails';
+import GraphsByMachine from './GraphsByMachine/GraphsByMachine';
 
 const App = () => {
     const classes = stylesDashboard();
@@ -81,6 +82,9 @@ const App = () => {
                                     </Route>
                                     <Route path="/checks">
                                         <TabelaChecks />
+                                    </Route>
+                                    <Route path="/graphs">
+                                        <GraphsByMachine />
                                     </Route>
                                     <Route path="/perfil">
                                         <UserProfileDetails />

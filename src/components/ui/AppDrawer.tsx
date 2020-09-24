@@ -20,7 +20,9 @@ const AppDrawer: FC<AllProps> = (props: AllProps) => {
 
     return (
         <Drawer
-            variant="persistent"
+            variant="temporary"
+            onEscapeKeyDown={props.handleDrawerClose}
+            onBackdropClick={props.handleDrawerClose}
             classes={{
                 paper: clsx(classes.drawerPaper, !props.open && classes.drawerPaperClose),
             }}

@@ -11,8 +11,8 @@ import MakeItensPieGraphs from './ItensGraphs';
 
 const Dashboard = () => {
     const classes = stylesDashboard();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight, classes.centerItens);
+
     return (
         <Container maxWidth="lg" className={classes.container}>
             <Title>Bem vindo ao Smart Maintenance</Title>
@@ -24,7 +24,7 @@ const Dashboard = () => {
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
                     <Paper className={fixedHeightPaper}>
-                    <MakeItensPieGraphs type="Itens" often ="week" />
+                    <MakeItensPieGraphs type="Itens" often ="week"  />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>

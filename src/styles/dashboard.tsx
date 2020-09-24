@@ -84,6 +84,10 @@ const stylesDashboard = makeStyles((theme) => ({
     titleDrawer: {
         fontSize: 13,
         fontWeight: 'bold',
+    },
+    centerItens: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },    
 }));
 

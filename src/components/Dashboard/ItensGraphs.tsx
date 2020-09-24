@@ -5,6 +5,7 @@ import Title from '../ui/Title';
 import UserData from '../../contexts/UserData';
 import { Check } from '../../types';
 import PieGraphic from '../Dashboard/PieGraphic'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface GraphFilter {
     type: string;
@@ -23,9 +24,9 @@ const MakeItensPieGraphs = (props:GraphFilter ) => {
             return dat.field === String(userData.user.field)
         }));
     });
-    },[]);
+    },[userData.user.field]);
 
-    function calculaItens (item: Check) {
+   const calculaItens = (item: Check) => {
         if(item.period === "1 x turno"){
             return (90*item.procedures.length);
         }else if(item.period === "2 x turno"){
@@ -61,20 +62,22 @@ const MakeItensPieGraphs = (props:GraphFilter ) => {
         allItens = itensDone;
         allItens.itensTotal = itensTotal;
     }
+        
         data = [
-            {name: "Done", value : allItens?.itensDone},
-            {name: "Total", value: (allItens? (allItens.itensTotal - allItens.itensDone) : 0)}
+            {name: "Realizados", value : allItens?.itensDone},
+            {name: "Não Realizados", value: (allItens? (allItens.itensTotal - allItens.itensDone) : 0)}
         ]
 
         return(
         <React.Fragment>
             <Title>{props.type} - {userData.user.field}</Title>
             <Typography component="p" variant="h6">
-                {`${props.type} realizados no mês: ${allItens ? allItens.itensDone : ''} `}
+                {`${props.type} realizados no mês: ${allItens ? allItens.itensDone : ''}` }
                 <br />
                 {`${props.type} esperados no mês: ${allItens ? allItens.itensTotal : ''}`}
             </Typography>
-            <PieGraphic data={data} />
+            { !allItens?.itensDone && <CircularProgress /> }
+            { allItens?.itensDone && <PieGraphic data={data} />}
         </React.Fragment>
     )
 

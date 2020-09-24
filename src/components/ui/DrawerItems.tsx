@@ -7,6 +7,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import Filter5Icon from '@material-ui/icons/Filter5';
 import BuildIcon from '@material-ui/icons/Build';
 import PeopleIcon from '@material-ui/icons/People';
+import InsertChart from '@material-ui/icons/InsertChart';
 import PermDataSettingIcon from '@material-ui/icons/PermDataSetting';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import TocIcon from '@material-ui/icons/Toc';
@@ -25,6 +26,12 @@ export const mainListItems = (
                 <BuildIcon />
             </ListItemIcon>
             <ListItemText primary="Limpeza e Inspeção" />
+        </ListItem>
+        <ListItem button component={Link} to="/graphs">
+            <ListItemIcon>
+                <InsertChart />
+            </ListItemIcon>
+            <ListItemText primary="Equipamentos" />
         </ListItem>
         <ListItem button component={Link} to="/lubrificacao">
             <ListItemIcon>
