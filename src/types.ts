@@ -112,3 +112,8 @@ export interface LimpezaInspecaoInfo {
     machineName: string;
     report: string;
 }
+
+export interface ChecksAndItensTotais {
+    checks: number;
+    itens: number;
+}

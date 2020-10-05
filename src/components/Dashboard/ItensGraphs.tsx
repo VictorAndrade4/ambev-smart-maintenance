@@ -1,15 +1,17 @@
 import React from 'react';
-import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Title from '../ui/Title';
 import UserData from '../../contexts/UserData';
 import { Check } from '../../types';
+import { ChecksAndItensTotais } from '../../types';
 import PieGraphic from '../Dashboard/PieGraphic'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface GraphFilter {
     type: string;
     often: string;
+    dados: Check[] | null;
+    totais: ChecksAndItensTotais | undefined;
 }
 
 const MakeItensPieGraphs = (props:GraphFilter ) => {
@@ -18,37 +20,13 @@ const MakeItensPieGraphs = (props:GraphFilter ) => {
     let allItens;
     const [itens, setItens] = React.useState<Check[] | null>(null);   
     React.useEffect(() => {
-    const month = new Date().getMonth()
-    axios.get(`/check/getChecksByMonth?month=${month}&field=${userData.user.field}`).then(response => {
-        setItens(response.data.filter((dat: any) => {
-            return dat.field === String(userData.user.field)
-        }));
-    });
-    },[userData.user.field]);
+        setItens(props.dados);
+    },[props.dados]);
 
-   const calculaItens = (item: Check) => {
-        if(item.period === "1 x turno"){
-            return (90*item.procedures.length);
-        }else if(item.period === "2 x turno"){
-            return (180*item.procedures.length);    
-        }else if(item.period === "diário"){
-            return (30*item.procedures.length);    
-        }else if(item.period === "semanal"){
-            return (4*item.procedures.length);    
-        }else if(item.period === "quinzenal"){
-            return (2*item.procedures.length);    
-        }else if(item.period === "mensal"){
-            return (item.procedures.length);    
-        }else{
-            return 0;
-        }
-    }
     if(itens){
         let itensTotal = 0;
         const itensDone = itens.reduce((total, item) => {
             var alreadyDone = 0;
-            var valor = calculaItens(item);     
-            itensTotal = itensTotal + (valor ? valor: 0);
             item.procedures.forEach((procedure) => {
                 if(procedure && procedure.checked){
                      alreadyDone++;           
@@ -60,7 +38,7 @@ const MakeItensPieGraphs = (props:GraphFilter ) => {
             }
         }, {itensDone: 0, itensTotal: 0});
         allItens = itensDone;
-        allItens.itensTotal = itensTotal;
+        allItens.itensTotal = (props.totais ? props.totais.itens : 0);
     }
         
         data = [
@@ -77,7 +55,7 @@ const MakeItensPieGraphs = (props:GraphFilter ) => {
                 {`${props.type} esperados no mês: ${allItens ? allItens.itensTotal : ''}`}
             </Typography>
             { !allItens?.itensDone && <CircularProgress /> }
-            { allItens?.itensDone && <PieGraphic data={data} />}
+            { props.totais?.itens && <PieGraphic data={data} />}
         </React.Fragment>
     )
 

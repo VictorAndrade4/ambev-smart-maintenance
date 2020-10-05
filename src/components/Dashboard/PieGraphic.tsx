@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const COLORS = ['#008744', '#d62d20'];
 
@@ -22,29 +22,29 @@ interface Data {
 }
 
 export default class PieGraphic extends PureComponent<{data : Data []}> {
-    static defaultProps = {
-    }
+ 
 
     render() {
+        const {data} = this.props;
         return (
-            <PieChart width={300} height={200}>
-                <Pie
-                    data={this.props.data}
-                    cx={150}
-                    cy={80}
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={70}
-                    fill="#8884d8"
-                    dataKey="value"
-                >
-                    {this.props.data.map((entry:any, index:any) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-            </PieChart>
+            <ResponsiveContainer>
+                <PieChart width={300} height={200}>
+                    <Pie
+                        data={data}
+                        labelLine={false}
+                        label={renderCustomizedLabel}
+                        outerRadius={70}
+                        fill="#8884d8"
+                        dataKey="value"
+                    >
+                        {this.props.data.map((entry:any, index:any) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            </ResponsiveContainer>
         );
     }
 }
