@@ -54,8 +54,8 @@ const MakeItensPieGraphs = (props:GraphFilter ) => {
                 <br />
                 {`${props.type} esperados no mês: ${allItens ? allItens.itensTotal : ''}`}
             </Typography>
-            { !allItens?.itensDone && <CircularProgress /> }
-            { props.totais?.itens && <PieGraphic data={data} />}
+            { !allItens?.itensTotal && <CircularProgress /> }
+            { allItens?.itensTotal && <PieGraphic data={data} />}
         </React.Fragment>
     )
 

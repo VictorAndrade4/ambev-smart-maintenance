@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from "react";
+import React, { FC } from "react";
 import { CincoPorquesInfo } from "../../types";
 import DateFnsUtils from "@date-io/date-fns";
-import { Container, TextField } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import {
   KeyboardDateTimePicker,
   MuiPickersUtilsProvider,
@@ -17,14 +17,14 @@ type AllProps = PropsDateSection;
 
 const DataSection: FC<AllProps> = (props: AllProps) => {
   const classes = stylesCincoPorques();
-  function dataDefaultValue(): string {
+  /* function dataDefaultValue(): string {
     const date: Date = new Date();
     const month: number = date.getMonth() + 1;
     const day: number = date.getDate();
     const year: number = date.getFullYear();
 
     return `${year}-${month}-${day}`;
-  }
+  } */
   const handleDataChange = (event: MaterialUiPickersDate) => {
     console.log(event?.toString());
     props.setDados({

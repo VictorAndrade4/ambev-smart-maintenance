@@ -64,8 +64,10 @@ const App = () => {
                     <Route path="/cadastrar">
                         <Cadastrar />
                     </Route>
+                </Switch>  
                     {isNullOrUndefined(cookies.user?.userId) ? (
                         <Redirect to="/login" />
+                                      
                     ) : (
                         <div className={classes.root}>
                             <CssBaseline />
@@ -111,7 +113,6 @@ const App = () => {
                             </main>
                         </div>
                     )}
-                </Switch>
             </UserData.Provider>
         </Router>
     );

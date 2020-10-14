@@ -12,25 +12,16 @@ export default class BarGraphic extends PureComponent<{data:Data[]}> {
     render() {
         const {data} = this.props;
         return (
-            <ResponsiveContainer>    
+            <ResponsiveContainer width={'100%'} height={'100%'}>    
                 <BarChart
-                    width={300}
-                    height={200}
                     data={data}
-                    margin={{
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        bottom: 0,
-                    }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip offset={0} isAnimationActive={false} />
                     <Legend />
-                    <Bar barSize={60} dataKey="Realizados" fill="#008744" />
-                    <Bar barSize={60} dataKey="Não Realizados" fill="#d62d20" />
+                    <Bar barSize={70} dataKey="Realizados" fill="#008744" />
+                    <Bar barSize={70} dataKey="Não Realizados" fill="#d62d20" />
                 </BarChart>
             </ResponsiveContainer>
         );

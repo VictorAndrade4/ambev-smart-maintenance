@@ -31,7 +31,6 @@ const FiltroLimpezaInspecao = () => {
     const handleChangeInitialDate = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setState({ ...state, initialDate: event.currentTarget.value });
     };
-
     const handleChangeFinalDate = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setState({ ...state, finalDate: event.currentTarget.value });
     };
@@ -93,7 +92,7 @@ const FiltroLimpezaInspecao = () => {
                 onChange={handleChangeName}
             />
             <Button onClick={handleSearchButton} variant="outlined" color="primary" className={classes.searchButton}>
-                Pesquisar
+                {state.initialDate}
             </Button>
             <Divider />
             {state.result.length < 1 ? (

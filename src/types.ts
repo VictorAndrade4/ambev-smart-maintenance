@@ -34,6 +34,7 @@ export interface Check {
     userId: string;
     period: string;
     link?: string;
+    report?: string;
 }
 
 export interface CheckDashboardHome {

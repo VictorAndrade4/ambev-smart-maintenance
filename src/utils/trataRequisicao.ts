@@ -1,5 +1,4 @@
 import { Operarios } from '../types';
-import { type } from 'os';
 type AllTypes = Operarios[] | undefined;
 export default function trataRequisicao<T>(type: string, response: any): any {
     if (type === 'Operarios') {

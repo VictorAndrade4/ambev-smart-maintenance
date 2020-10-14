@@ -10,14 +10,25 @@ const stylesGraphsByMachine = makeStyles((theme) => ({
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
     },
-    paper: {
+    card: {
+        height: '33%',
         padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
+        margin: theme.spacing(1),
     },
-    fixedHeight: {
-        height: 350,
+   
+    title: {
+        display: 'block',
+        width: '100%',
+        boxSizing:'border-box',
+    },
+    
+    formControl: {
+        width:'88%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        padding: theme.spacing(2),
+        margin: theme.spacing(2),
+        boxSizing:'border-box',
     }
 
 }));

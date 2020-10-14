@@ -1,9 +1,16 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['#008744', '#d62d20'];
+
+
+const COLORS = ['#008744','#F4B400', '#d62d20'];
 
 const RADIAN = Math.PI / 180;
+
+const processedData = ({initialDate, endDate, data}:any) =>{
+
+}
+
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -16,19 +23,18 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
     );
 };
 
-interface Data {
-    name: string | undefined;
-    value: number | undefined; 
-}
 
-export default class PieGraphic extends PureComponent<{data : Data []}> {
- 
 
+export default class MachinePieGraphic extends PureComponent<{data : any, initialDate:string, endDate: string }> {
+    
     render() {
         const {data} = this.props;
+        const {initialDate} = this.props;
+        const {endDate} = this.props;
+
         return (
             <ResponsiveContainer>
-                <PieChart width={300} height={200}>
+                <PieChart>
                     <Pie
                         data={data}
                         labelLine={false}

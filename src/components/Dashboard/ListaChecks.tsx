@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,7 +17,7 @@ const ListaChecksRecentes = () => {
         axios.get(`/check/getChecksOfTheDay?field=${userData.user.field}`).then((response) => {
             setRows(response.data);
         });
-    }, []);
+    }, [userData.user.field]);
 
     return (
         <React.Fragment>

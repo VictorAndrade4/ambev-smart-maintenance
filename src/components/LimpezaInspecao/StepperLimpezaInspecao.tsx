@@ -141,7 +141,7 @@ const StepperLimpezaInspecao: FC<AllProps> = (props: AllProps) => {
                                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                         const novoEquipamento = selectedEquipamento;
                                         selectedEquipamento.procedures.map((p) => {
-                                            if (p._id == procedure._id) p.checked = !p.checked;
+                                            if (p._id === procedure._id) p.checked = !p.checked;
                                         });
                                         setSelectedEquipamento({ ...novoEquipamento });
                                     }}
