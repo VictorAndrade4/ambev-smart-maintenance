@@ -35,7 +35,6 @@ const MakeEquipamentList = (props: any) => {
   return (
     <>
       {(state!==undefined)&& state!== '' && state?.map((value: any, index: any) => (
-        
         <Card key={`${index}`} className={classes.AcordionNode} elevation={6} >
           <Accordion TransitionProps={{ unmountOnExit: true }} >
             <AccordionSummary
@@ -46,10 +45,10 @@ const MakeEquipamentList = (props: any) => {
               <CardHeader className={classes.content}
                 disableTypography={true}
                 title={<div className={classes.content}>
-                <p className={classes.line}><p className={classes.destaque}>Período - </p><span className={classes.margin}>{value.period}</span>
-                <p className={classes.destaque}>Data - </p><span className={classes.margin}> {new Date(value.date).toLocaleDateString()}</span></p>
-                <p className={classes.line}><p className={classes.destaque}>Operador - </p><span className={classes.margin}>{value.userId}</span>
-                <p className={classes.destaque}>Execução - </p><span className={classes.margin}>{handleComplete(value).toFixed(2)} %</span></p></div>}
+                <p className={classes.line}><span className={classes.destaque}>Período: </span><span className={classes.margin}>{value.period}</span>
+                <span className={classes.destaque}>Data: </span><span className={classes.margin}> {new Date(value.date).toLocaleDateString()}</span></p>
+                <p className={classes.line}><span className={classes.destaque}>Operador: </span><span className={classes.margin}>{value.userId}</span>
+                <span className={classes.destaque}>Execução: </span><span className={classes.margin}>{handleComplete(value).toFixed(2)} %</span></p></div>}
               />  
             </AccordionSummary>
             <Divider />

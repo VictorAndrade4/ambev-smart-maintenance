@@ -90,7 +90,7 @@ const GraphsByMachine = () => {
               animateYearScrolling={false}
               margin="normal"
               id="initial-date-dialog"
-              label="Date inicial"
+              label="Data inicial"
               format="dd/MM/yyyy"
               disableFuture={true}
               value={selectedInicialDate}
@@ -105,7 +105,7 @@ const GraphsByMachine = () => {
               animateYearScrolling={false}
               margin="normal"
               id="end-date-dialog"
-              label="Date picker dialog"
+              label="Data Final"
               format="dd/MM/yyyy"
               disableFuture={true}
               value={selectedEndDate}

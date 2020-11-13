@@ -9,11 +9,12 @@ const stylesGraphsByMachine = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
+        margin: theme.spacing(2),
     },
     card: {
         height: '33%',
         padding: theme.spacing(2),
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
     },
    
     title: {

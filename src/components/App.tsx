@@ -7,6 +7,7 @@ import AppDrawer from './ui/AppDrawer';
 import DefaultAppBar from './ui/DefaultAppBar';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import LimpezaInspecao from './LimpezaInspecao/LimpezaInspecao';
+import Lubrificacao from './Lubrificacao/Lubrificacao';
 import Login from './Login/Login';
 import UserData from '../contexts/UserData';
 import { isNullOrUndefined } from 'util';
@@ -14,6 +15,7 @@ import { useCookies } from 'react-cookie';
 import { User } from '../types';
 import CincoPorques from './CincoPorques/CincoPorques';
 import TabelaChecks from './TabelaChecks/TabelaChecks';
+import TabelaLubrificacao from './TabelaLubrificacao/TabelaLubrificacao'
 import TabelaOperarios from './TabelaOperarios/TabelaOperarios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FiltroLimpezaInspecao from './FiltroLimpezaInspecao/FiltroLimpezaInspecao';
@@ -79,11 +81,17 @@ const App = () => {
                                     <Route path="/limp-insp">
                                         <LimpezaInspecao />
                                     </Route>
+                                    <Route path="/lubrificacao">
+                                        <Lubrificacao/>
+                                    </Route>
                                     <Route path="/5w">
                                         <CincoPorques />
                                     </Route>
                                     <Route path="/checks">
                                         <TabelaChecks />
+                                    </Route>
+                                    <Route path="/lubrificacoes">
+                                        <TabelaLubrificacao />
                                     </Route>
                                     <Route path="/graphs">
                                         <GraphsByMachine />
@@ -101,6 +109,7 @@ const App = () => {
                                             <FiltroLimpezaInspecao />
                                         </Route>
                                     )}
+                                    
                                     {(cookies.user?.admin || cookies.user?.field === 'Engenharia') && (
                                         <Route path="/filtro-5w">
                                             <FiltroCincoPorques />

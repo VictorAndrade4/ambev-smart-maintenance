@@ -57,6 +57,12 @@ export const adminListItems = (
             </ListItemIcon>
             <ListItemText primary="Cadastro de Checks" />
         </ListItem>
+        <ListItem button component={Link} to="/lubrificacoes">
+            <ListItemIcon>
+            <PlaylistAddCheckIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cadastro Lubrificação" />
+        </ListItem>
         <ListItem button component={Link} to="/filtro-limp-insp">
             <ListItemIcon>
                 <TocIcon />

@@ -24,7 +24,7 @@ import clsx from 'clsx';
 import Title from '../ui/Title';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router-dom';
-
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 // Cada passo terá 5 procedimentos
 const numberOfProceduresPerStep = 5;
 const getSteps = (procedures: Procedimento[]) => {
@@ -137,8 +137,9 @@ const StepperLimpezaInspecao: FC<AllProps> = (props: AllProps) => {
                                 <Checkbox
                                     className={classes.checkbox}
                                     checked={procedure.checked}
+                                    icon={<CheckBoxOutlineBlankIcon fontSize="large" />}
                                     color="primary"
-                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                    onChange={() => {
                                         const novoEquipamento = selectedEquipamento;
                                         selectedEquipamento.procedures.map((p) => {
                                             if (p._id === procedure._id) p.checked = !p.checked;
