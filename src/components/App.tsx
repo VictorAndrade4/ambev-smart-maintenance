@@ -75,6 +75,7 @@ const App = () => {
                             <DefaultAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
                             <main className={classes.content}>
                                 <div className={classes.appBarSpacer} />
+                                   <Switch>
                                     <Route path="/limp-insp">
                                         <LimpezaInspecao />
                                     </Route>
@@ -115,6 +116,7 @@ const App = () => {
                                     <Route path="/">
                                         <Dashboard />
                                     </Route>
+                                </Switch>
                             </main>
                         </div>
                         )}
