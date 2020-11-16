@@ -42,7 +42,6 @@ const Lubrificacao = () => {
             machineName: selectedLubMachine?.name || '',
             report: reportComments,
         };
-
         axios
             .post('/lubrification/create', dados)
             .then(() => {

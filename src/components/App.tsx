@@ -45,7 +45,7 @@ const App = () => {
         'Content-Type': 'application/json',
     };
     //axios.defaults.baseURL = 'http://localhost:3333';
-    axios.defaults.baseURL = 'https://cors-anywhere.herokuapp.com/http://3.17.151.221:3333';
+    axios.defaults.baseURL = 'https://smaintenance.herokuapp.com';
     axios.interceptors.response.use(
         (response) => {
             return response;
@@ -65,11 +65,9 @@ const App = () => {
                     </Route>
                     <Route path="/cadastrar">
                         <Cadastrar />
-                    </Route>
-                </Switch>  
+                    </Route> 
                     {isNullOrUndefined(cookies.user?.userId) ? (
-                        <Redirect to="/login" />
-                                      
+                        <Redirect to="/login" />                                  
                     ) : (
                         <div className={classes.root}>
                             <CssBaseline />
@@ -77,7 +75,6 @@ const App = () => {
                             <DefaultAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
                             <main className={classes.content}>
                                 <div className={classes.appBarSpacer} />
-                                <Switch>
                                     <Route path="/limp-insp">
                                         <LimpezaInspecao />
                                     </Route>
@@ -118,10 +115,10 @@ const App = () => {
                                     <Route path="/">
                                         <Dashboard />
                                     </Route>
-                                </Switch>
                             </main>
                         </div>
-                    )}
+                        )}
+                    </Switch>
             </UserData.Provider>
         </Router>
     );
