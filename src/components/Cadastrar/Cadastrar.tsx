@@ -174,7 +174,7 @@ const Cadastrar = () => {
                                     <MenuItem value="Utilidades">Utilidades</MenuItem>
                                     <MenuItem value="Xaroparia">Xaroparia</MenuItem>
                                     <MenuItem value="Engenharia">Engenharia</MenuItem>
-                                    <MenuItem value="testArea">testArea</MenuItem>
+                                    <MenuItem value="Almoxarifado">Almoxarifado</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
