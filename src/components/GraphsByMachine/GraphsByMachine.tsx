@@ -58,6 +58,21 @@ const GraphsByMachine = () => {
       });
   };
 
+  const handleExcelClick = () => {
+    let inicial = selectedInicialDate?.toISOString().split("T")[0];
+    let final = selectedEndDate?.toISOString().split("T")[0];
+    axios
+      .get(`/machines/excel`,{responseType: 'blob'})
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data], {type:'application/vnd.ms-excel'}));
+        const link = document.createElement('a');  
+        link.href = url;
+        link.setAttribute('download', `Checks do ${selectedInicialDate?.getDate()} até dia ${selectedEndDate?.getDate()}.xlsx`);
+        document.body.appendChild(link);
+        link.click();   
+      });
+  };
+
   const handleSelectEquip = (equip: string | unknown) => {
     if (equip) {
       setEquipamento(equip);
@@ -122,6 +137,14 @@ const GraphsByMachine = () => {
             >
               Pesquisar
             </Button>
+            {selectedInicialDate && selectedEndDate ? (<Button
+              variant="contained"
+              onClick={handleExcelClick}
+              style={{ padding: "0.8rem" }}
+              color="primary"
+            >
+              Exportar para Excel
+            </Button>) : null}
           </Grid>
         </MuiPickersUtilsProvider>
         {allChecks.length < 1 ? (

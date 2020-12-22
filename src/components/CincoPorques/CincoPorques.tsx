@@ -13,10 +13,6 @@ import axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
 import { isNullOrUndefined } from 'util';
 
-const getSteps = () => {
-    return ['Equipamento', 'Ações Corretivas', '5 Porquês', 'Data', 'Ações Preventivas'];
-};
-
 const dadosIniciais: CincoPorquesInfo = {
     _id: '',
     use: '',
@@ -37,11 +33,16 @@ const dadosIniciais: CincoPorquesInfo = {
 };
 
 const CincoPorques = () => {
+    const userData = useContext(UserData);
+    const getSteps = () => {
+       let menu = userData.user.field === "Almoxarifado" ? ['Almoxarifado', 'Ações Corretivas', '5 Porquês', 'Data', 'Ações Preventivas'] :
+         ['Equipamento', 'Ações Corretivas', '5 Porquês', 'Data', 'Ações Preventivas'];
+         return menu;
+    };
     const classes = stylesCincoPorques();
     const [dados, setDados] = useState(dadosIniciais);
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
-    const userData = useContext(UserData);
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
     const [isRequestSent, setIsRequestSent] = useState(false);
 

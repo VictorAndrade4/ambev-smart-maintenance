@@ -26,20 +26,22 @@ const ListaChecksRecentes = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Data</TableCell>
-                        <TableCell>UserID</TableCell>
+                        <TableCell>Usuário</TableCell>
                         <TableCell>Área</TableCell>
                         <TableCell>Equipamento</TableCell>
-                        <TableCell align="right">Período</TableCell>
+                        <TableCell>Turno</TableCell>
+                        <TableCell>Período</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row: CheckDashboardHome, index) => (
                         <TableRow key={`ultimos-5checks-lista-${index}`}>
-                            <TableCell>{row.date}</TableCell>
+                            <TableCell>{new Date(row.date).toLocaleString()}</TableCell>
                             <TableCell>{row.userId}</TableCell>
                             <TableCell>{row.field}</TableCell>
                             <TableCell>{row.machineName}</TableCell>
-                            <TableCell align="right">{row.period}</TableCell>
+                            <TableCell>{new Date(row.date).getHours().toLocaleString()>"23" && new Date(row.date).getHours().toLocaleString()>"7" ? "Turno A" : (new Date(row.date).getHours().toLocaleString()>"8" && new Date(row.date).getHours().toLocaleString()>"16" ? "Turno B" : "Turno C")}</TableCell>
+                            <TableCell>{row.period}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

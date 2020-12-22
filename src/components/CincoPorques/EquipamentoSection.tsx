@@ -57,7 +57,7 @@ const EquipamentoSection: FC<AllProps> = (props: AllProps) => {
                 className={classes.item}
                 variant="outlined"
                 placeholder="123456"
-                helperText="Tag"
+                helperText= {userData.user.field === "Almoxarifado" ? "Pedido / Material" : "Tag" } 
                 onChange={handleTagChange}
             />
             <FormControl className={classes.item} variant="outlined">
@@ -79,7 +79,7 @@ const EquipamentoSection: FC<AllProps> = (props: AllProps) => {
                         </MenuItem>
                     ))}
                 </Select>
-                <FormHelperText>Equipamento</FormHelperText>
+                <FormHelperText> Equipamento</FormHelperText>
             </FormControl>
         </Container>
     );
