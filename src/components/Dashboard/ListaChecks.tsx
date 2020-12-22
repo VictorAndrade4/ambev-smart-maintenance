@@ -34,7 +34,7 @@ const ListaChecksRecentes = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row: CheckDashboardHome, index) => (
+                    {rows && rows.map((row : CheckDashboardHome, index) => (
                         <TableRow key={`ultimos-5checks-lista-${index}`}>
                             <TableCell>{new Date(row.date).toLocaleString()}</TableCell>
                             <TableCell>{row.userId}</TableCell>
