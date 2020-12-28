@@ -40,7 +40,7 @@ const ListaChecksRecentes = () => {
                             <TableCell>{row.userId}</TableCell>
                             <TableCell>{row.field}</TableCell>
                             <TableCell>{row.machineName}</TableCell>
-                            <TableCell>{new Date(row.date).getHours().toLocaleString()>"23" && new Date(row.date).getHours().toLocaleString()>"7" ? "Turno A" : (new Date(row.date).getHours().toLocaleString()>"8" && new Date(row.date).getHours().toLocaleString()>"16" ? "Turno B" : "Turno C")}</TableCell>
+                            <TableCell>{(new Date(row.date).getHours().toLocaleString() >= "23" && new Date(row.date).getHours().toLocaleString() < "7") ? "Turno A" : (new Date(row.date).getHours().toLocaleString() >= "7" && new Date(row.date).getHours().toLocaleString() < "15" ? "Turno B" : "Turno C")}</TableCell>
                             <TableCell>{row.period}</TableCell>
                         </TableRow>
                     ))}
