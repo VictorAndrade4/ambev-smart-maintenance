@@ -34,16 +34,19 @@ const ListaChecksRecentes = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows && rows.map((row : CheckDashboardHome, index) => (
-                        <TableRow key={`ultimos-5checks-lista-${index}`}>
+                    {rows && rows.map((row : CheckDashboardHome, index) => {
+                       let date = Number(new Date(row.date).getHours().toLocaleString());
+                       return <TableRow key={`ultimos-5checks-lista-${index}`}>
                             <TableCell>{new Date(row.date).toLocaleString()}</TableCell>
                             <TableCell>{row.userId}</TableCell>
                             <TableCell>{row.field}</TableCell>
                             <TableCell>{row.machineName}</TableCell>
-                            <TableCell>{(new Date(row.date).getHours().toLocaleString() >= "23" && new Date(row.date).getHours().toLocaleString() < "7") ? "Turno A" : (new Date(row.date).getHours().toLocaleString() >= "7" && new Date(row.date).getHours().toLocaleString() < "15" ? "Turno B" : "Turno C")}</TableCell>
+                            <TableCell>{date < 7 || date === 23  
+                            ? "Turno A"
+                            : (date >= 7 && date < 15 ? "Turno B" : "Turno C")}</TableCell> 
                             <TableCell>{row.period}</TableCell>
                         </TableRow>
-                    ))}
+                    })}
                 </TableBody>
             </Table>
         </React.Fragment>
