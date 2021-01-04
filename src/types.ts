@@ -79,6 +79,7 @@ export interface CheckDashboardHome {
     frequency: number;
     userId: string;
     period: string;
+    kind:string;
 }
 
 

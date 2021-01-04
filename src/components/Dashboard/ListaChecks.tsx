@@ -14,20 +14,25 @@ const ListaChecksRecentes = () => {
     const [rows, setRows] = useState<CheckDashboardHome[]>([]);
 
     useEffect(() => {
-        axios.get(`/check/getChecksOfTheDay?field=${userData.user.field}`).then((response) => {
-            setRows(response.data);
-        });
+        axios.all([ 
+        axios.get(`/check/getChecksOfTheDay?field=${userData.user.field}`),
+        axios.get(`/lubrification/getChecksOfTheDay?field=${userData.user.field}`)
+        ]).then(axios.spread((...response) => {
+            let dados = [...response[0].data,...response[1].data];
+            setRows(dados);
+        }));
     }, [userData.user.field]);
 
     return (
         <React.Fragment>
-            <Title>Relatórios Recentes (Limpeza e Inspeção)</Title>
+            <Title>Relatório Recente (Últimas 24h)</Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Data</TableCell>
                         <TableCell>Usuário</TableCell>
                         <TableCell>Área</TableCell>
+                        <TableCell>Tipo</TableCell>
                         <TableCell>Equipamento</TableCell>
                         <TableCell>Turno</TableCell>
                         <TableCell>Período</TableCell>
@@ -40,6 +45,7 @@ const ListaChecksRecentes = () => {
                             <TableCell>{new Date(row.date).toLocaleString()}</TableCell>
                             <TableCell>{row.userId}</TableCell>
                             <TableCell>{row.field}</TableCell>
+                            <TableCell>{row.kind}</TableCell>
                             <TableCell>{row.machineName}</TableCell>
                             <TableCell>{date < 7 || date === 23  
                             ? "Turno A"
