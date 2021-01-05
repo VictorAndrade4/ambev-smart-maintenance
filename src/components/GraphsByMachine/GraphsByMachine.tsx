@@ -62,7 +62,7 @@ const GraphsByMachine = () => {
     let inicial = selectedInicialDate?.toISOString().split("T")[0];
     let final = selectedEndDate?.toISOString().split("T")[0];
     axios
-      .get(`/machines/excel`,{responseType: 'blob'})
+      .get(`/machines/excel?begin=${inicial}&end=${final}&field=${userData.user?.field}`,{responseType: 'blob'})
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data], {type:'application/vnd.ms-excel'}));
         const link = document.createElement('a');  
