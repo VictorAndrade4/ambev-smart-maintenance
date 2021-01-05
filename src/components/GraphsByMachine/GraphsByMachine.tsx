@@ -48,7 +48,7 @@ const GraphsByMachine = () => {
 
   const handleClick = () => {
     let inicial = selectedInicialDate?.toISOString().split("T")[0];
-    let final = selectedEndDate?.toISOString().split("T")[0];
+    let final = selectedEndDate?.toISOString();
     axios
       .get(
         `/check/getCheckByDate?begin=${inicial}&end=${final}&field=${userData.user?.field}`
@@ -60,7 +60,7 @@ const GraphsByMachine = () => {
 
   const handleExcelClick = () => {
     let inicial = selectedInicialDate?.toISOString().split("T")[0];
-    let final = selectedEndDate?.toISOString().split("T")[0];
+    let final = selectedEndDate?.toISOString();
     axios
       .get(`/machines/excel?begin=${inicial}&end=${final}&field=${userData.user?.field}`,{responseType: 'blob'})
       .then((response) => {
