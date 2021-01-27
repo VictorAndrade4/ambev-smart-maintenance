@@ -23,12 +23,12 @@ const MakeEquipamentList = (props: any) => {
   }, [props]);
   
   const handleComplete = (value: any) =>{
-    let conclued = 0;  
-    value.procedures.map((procedure: any) => {
-        if(procedure.checked){
-          conclued++;
-        }
-      })
+    let conclued = 0;
+    value.procedures.forEach((procedure: any) => {
+      if(procedure.checked){
+        conclued++;
+      }
+    });
       return (conclued/value.procedures.length*100);
   }  
 

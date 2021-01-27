@@ -24,7 +24,7 @@ const MakeChecksPieGraphs = (props:GraphFilter ) => {
   let totalChecksByArea = props.totais? props.totais?.checks : 0;
 
     let dataCheck = [
-        {name: 'Checks (%)', Realizados : String((checks? (checks.length / totalChecksByArea * 100) : 0).toFixed(2)), "Não Realizados" : (100 - (checks ? (checks.length / totalChecksByArea * 100):0)).toFixed(2)}
+        {name: `${props.type} (%) - Clique para mais detalhes`, Realizados : String((checks? (checks.length / totalChecksByArea * 100) : 0).toFixed(2)), "Não Realizados" : (100 - (checks ? (checks.length / totalChecksByArea * 100):0)).toFixed(2)}
     ]
 
     return(
@@ -36,7 +36,7 @@ const MakeChecksPieGraphs = (props:GraphFilter ) => {
                 {`${props.type} esperados no mês: ${totalChecksByArea}`}
             </Typography>
             { totalChecksByArea===undefined && <CircularProgress /> }
-            { totalChecksByArea!==undefined && <BarGraphic data={dataCheck} />}
+            { totalChecksByArea!==undefined && <BarGraphic data={dataCheck} modal={checks} kind={props.type} />}
         </React.Fragment>
     )
 

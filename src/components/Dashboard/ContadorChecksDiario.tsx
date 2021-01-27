@@ -34,7 +34,7 @@ const ContadorChecksDiario = () => {
                 {`${state.quantidade} checks`}
             </Typography>
             <Typography color="textSecondary" className={classes.depositContext}>
-                {`em ${new Date().toISOString().split('T')[0]}`}
+                {`em ${new Date().toLocaleDateString()}`}
             </Typography>
             <Button
                 variant="contained"

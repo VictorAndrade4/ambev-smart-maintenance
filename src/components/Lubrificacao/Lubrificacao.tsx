@@ -37,7 +37,7 @@ const Lubrificacao = () => {
             frequency: selectedLubMachine?.frequency || -1,
             arrayAllPages: [selectedLubMachine?.procedures] as LubProcedure[][],
             date: new Date(),
-            userId: userData.user.userId || '',
+            userId: userData.user.name || '',
             field: userData.user.field || '',
             machineName: selectedLubMachine?.name || '',
             report: reportComments,

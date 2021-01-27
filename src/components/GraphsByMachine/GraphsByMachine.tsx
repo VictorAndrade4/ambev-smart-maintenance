@@ -21,7 +21,6 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import MakeEquipamentList from "../GraphsByMachine/MakeEquipamentList";
-import MachinePieGraphic from "../GraphsByMachine/MachinePieGraphic";
 
 const GraphsByMachine = () => {
   const classes = stylesGraphsByMachine();

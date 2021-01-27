@@ -26,7 +26,6 @@ const DataSection: FC<AllProps> = (props: AllProps) => {
     return `${year}-${month}-${day}`;
   } */
   const handleDataChange = (event: MaterialUiPickersDate) => {
-    console.log(event?.toString());
     props.setDados({
       ...props.dados,
       date: event ? new Date(event?.toString()) : new Date(),

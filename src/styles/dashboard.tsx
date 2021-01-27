@@ -44,14 +44,14 @@ const stylesDashboard = makeStyles((theme) => ({
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
+            easing: theme.transitions.easing.easeIn,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
     drawerPaperClose: {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
+            easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.leavingScreen,
         }),
         width: theme.spacing(7),
@@ -70,13 +70,13 @@ const stylesDashboard = makeStyles((theme) => ({
         paddingBottom: theme.spacing(4),
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         display: 'flex',
-        overflow: 'auto',
+        overflowY: 'hidden',
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 350,
+        height: 400,
     },
     drawerIcon: {
         marginRight: '10px',

@@ -8,7 +8,6 @@ import stylesDashboard from '../../styles/dashboard';
 import Copyright from '../ui/Copyright';
 import Title from '../ui/Title';
 import MakeChecksPieGraphs from './ChecksGraphs';
-import MakeItensPieGraphs from './ItensGraphs';
 import axios from 'axios';
 import { Check } from '../../types';
 import { ChecksAndItensTotais } from '../../types';
@@ -19,20 +18,29 @@ const Dashboard = () => {
     const userData = React.useContext(UserData);
     const [checksAndItens, setChecksAndItens] = React.useState<Check[] | null>(null);
     const [checksItensTotal, setChecksItensTotal] = React.useState<ChecksAndItensTotais | undefined>();
+    const [lubchecksItensTotal, setLubChecksItensTotal] = React.useState<ChecksAndItensTotais | undefined>();
+    const [lubrifications, setLubrifications] = React.useState<Check[] | null>(null);
     React.useEffect(() => {
         const month = new Date().getMonth()
-        axios.get(`/check/getChecksByMonth?month=${month}&field=${userData.user.field}`).then(response => {
-        setChecksAndItens(response.data.filter((dat: any) => {
-            return dat.field === String(userData.user.field)
-        }));
-        });
-        axios.get(`/machines/count?field=${userData.user.field}`).then(response => {
-            setChecksItensTotal(response.data);
-        });
+        axios.all([
+            axios.get(`/check/getChecksByMonth?month=${month}&field=${userData.user.field}`),
+            axios.get(`/machines/count?field=${userData.user.field}`),
+            axios.get(`/lubrification/getChecksByMonth?month=${month}&field=${userData.user.field}`),
+            axios.get(`/lubmachines/count?field=${userData.user.field}`),
+        ]).then(axios.spread((...response) => {
+            setChecksAndItens(response[0].data.filter((dat: any) => {
+                return dat.field === String(userData.user.field)
+            }));
+            setChecksItensTotal(response[1].data);
+            setLubrifications(response[2].data.filter((dat: any) => {
+                return dat.field === String(userData.user.field)
+            }));
+            setLubChecksItensTotal(response[3].data)
+        }));;
 },[userData.user.field]);
 
     return (
-        <Container maxWidth="lg" className={classes.container}>
+        <Container className={classes.container}>
             <Title>Bem vindo ao Smart Maintenance</Title>
             <Grid container spacing={3}>
             <Grid item xs={12} md={4} lg={4}>
@@ -40,14 +48,15 @@ const Dashboard = () => {
                        <MakeChecksPieGraphs type="Checks" often ="week" dados={checksAndItens} totais = {checksItensTotal} />
                     </Paper>
                 </Grid>
+                
                 <Grid item xs={12} md={4} lg={4}>
                     <Paper className={fixedHeightPaper}>
-                    <MakeItensPieGraphs type="Itens" often ="week" dados={checksAndItens} totais = {checksItensTotal} />
+                        <ContadorChecksDiario />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
                     <Paper className={fixedHeightPaper}>
-                        <ContadorChecksDiario />
+                       <MakeChecksPieGraphs type="Lubrificação" often ="week" dados={lubrifications} totais = {lubchecksItensTotal} />
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
