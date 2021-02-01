@@ -123,19 +123,12 @@ export default class Example extends PureComponent<{
               dataKey="Realizados"
               onClick={this.handleClick}
               label={{ position: 'top' }}
-              fill={
-                index === activeIndex
-                  ? ""
-                  : data[index]['Realizados']/ data[index].previstos >= 1
-                  ? "#259A3D"
-                  : "#D82B22"
-              }
             >
               {data.map((entry: any, index: number) => (
                 <Cell
                   cursor="pointer"
                   fill={
-                    index === activeIndex
+                    (index === activeIndex && entry['Realizados'])
                       ? ""
                       : entry['Realizados']/ entry.previstos >= 1
                       ? "#259A3D"

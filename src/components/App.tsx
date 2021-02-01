@@ -45,7 +45,7 @@ const App = () => {
         'Content-Type': 'application/json',
     };
     //axios.defaults.baseURL = 'http://localhost:3333';
-    axios.defaults.baseURL = 'https://smaintenance.herokuapp.com';
+    axios.defaults.baseURL = 'https://smaintenance-homologacao.herokuapp.com/';
     axios.interceptors.response.use(
         (response) => {
             return response;
