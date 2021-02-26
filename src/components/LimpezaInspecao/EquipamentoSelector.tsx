@@ -65,21 +65,33 @@ const EquipamentoSelector: FC<AllProps> = (props: AllProps) => {
         displayEmpty
       >
         <MenuItem value="" disabled>
-          Nenhum
+          Selecione
         </MenuItem>
-        {props.equipamentosDoGrupo?.map((equipamento, index) => (
+        {props.equipamentosDoGrupo?.length !== 0?
+         props.equipamentosDoGrupo?.map((equipamento, index) => (
+              <MenuItem
+                key={"equipamento-limp-insp-" + index}
+                value={equipamento._id}
+              >
+                {equipamento.name +
+                  " (" +
+                  equipamento.period +
+                  " " +
+                  equipamento.frequency +
+                  "x)"}
+              </MenuItem>
+            ))
+          : props.grupo?
           <MenuItem
-            key={"equipamento-limp-insp-" + index}
-            value={equipamento._id}
-          >
-            {equipamento.name +
-              " (" +
-              equipamento.period +
-              " " +
-              equipamento.frequency +
-              "x)"}
-          </MenuItem>
-        ))}
+                key={"equipamento-concluído"}
+                value=""
+                disabled
+              >
+                Todos os checks previstos até o momento foram realizados
+              </MenuItem>
+              :
+              ""
+      }
       </Select>
       <FormHelperText>Selecione um Equipamento</FormHelperText>
     </FormControl>

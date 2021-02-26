@@ -41,7 +41,7 @@ const GrupoLubMachineSelector: FC<AllProps> = (props: AllProps) => {
         <FormControl className={classes.selector} variant="outlined">
             <Select value={props.selectedGrupo} onChange={handleChange} displayEmpty>
                 <MenuItem value="" disabled>
-                    Nenhum
+                    Selecione
                 </MenuItem>
                 {props.grupos?.map((data, index) => (
                     <MenuItem key={'grupoequipamento-lubrificacao' + index} value={data.title}>
