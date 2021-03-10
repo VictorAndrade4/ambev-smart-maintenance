@@ -11,6 +11,7 @@ import MakeChecksPieGraphs from './ChecksGraphs';
 import axios from 'axios';
 import { Check } from '../../types';
 import { ChecksAndItensTotais } from '../../types';
+import Criticidade from './Criticidade';
 
 const Dashboard = () => {
     const classes = stylesDashboard();
@@ -50,8 +51,9 @@ const Dashboard = () => {
                 </Grid>
                 
                 <Grid item xs={12} md={4} lg={4}>
-                    <Paper className={fixedHeightPaper}>
-                        <ContadorChecksDiario />
+                    <Paper className={classes.crit}>
+                        {/* <ContadorChecksDiario /> */}
+                        <Criticidade />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>

@@ -75,6 +75,10 @@ const stylesDashboard = makeStyles((theme) => ({
         overflowY: 'hidden',
         flexDirection: 'column',
     },
+    crit:{
+        height: 400,
+        overflowY: 'auto',
+    },
     fixedHeight: {
         height: 400,
     },

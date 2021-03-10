@@ -36,16 +36,12 @@ export default class Example extends PureComponent<{
       let find = 0;
       for (let d of done) {
         if (wait.name === d.name) {
-          //let names = wait.name.slice(8,wait.name.length)
-          //wait.name = names.trim()
-          //d.name = names.trim()
           const temp = { ...wait, ...d };
           finalObject.push(temp);
           find++;
         }
       }
       if(find === 0 && wait.name!== ''){
-        wait.name = wait.name.slice(9,wait.name.length).trim()
         const temp = {...wait}
         finalObject.push(temp)
       }
