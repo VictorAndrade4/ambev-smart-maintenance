@@ -98,14 +98,19 @@ const Login = () => {
                         autoComplete="current-password"
                         value={password}
                         onChange={handlePasswordChange}
+                        onKeyPress={(data: any) => {
+                            if (data.charCode === 13) {
+                              handleEntrarClick()
+                            }
+                          }}
                     />
                     <Button
                         onClick={handleEntrarClick}
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        type="submit"
                     >
                         Entrar
                     </Button>

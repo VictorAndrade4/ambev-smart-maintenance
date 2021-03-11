@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import UserData from '../../contexts/UserData';
 import { Box, Grid, Paper, Container } from '@material-ui/core';
-import ContadorChecksDiario from './ContadorChecksDiario';
+//import ContadorChecksDiario from './ContadorChecksDiario';
 import ListaChecksRecentes from './ListaChecks';
 import stylesDashboard from '../../styles/dashboard';
 import Copyright from '../ui/Copyright';
@@ -12,6 +12,7 @@ import axios from 'axios';
 import { Check } from '../../types';
 import { ChecksAndItensTotais } from '../../types';
 import Criticidade from './Criticidade';
+import GraphsByEquip from './GraphsByEquip';
 
 const Dashboard = () => {
     const classes = stylesDashboard();
@@ -21,6 +22,7 @@ const Dashboard = () => {
     const [checksItensTotal, setChecksItensTotal] = React.useState<ChecksAndItensTotais | undefined>();
     const [lubchecksItensTotal, setLubChecksItensTotal] = React.useState<ChecksAndItensTotais | undefined>();
     const [lubrifications, setLubrifications] = React.useState<Check[] | null>(null);
+    const [graphData, setGraphData] = React.useState<any[] | null>(null);
     React.useEffect(() => {
         const month = new Date().getMonth()
         axios.all([
@@ -38,8 +40,7 @@ const Dashboard = () => {
             }));
             setLubChecksItensTotal(response[3].data)
         }));;
-},[userData.user.field]);
-
+},[graphData]);
     return (
         <Container className={classes.container}>
             <Title>Bem vindo ao Smart Maintenance</Title>
@@ -53,12 +54,17 @@ const Dashboard = () => {
                 <Grid item xs={12} md={4} lg={4}>
                     <Paper className={classes.crit}>
                         {/* <ContadorChecksDiario /> */}
-                        <Criticidade />
+                        <Criticidade data={setGraphData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
                     <Paper className={fixedHeightPaper}>
                        <MakeChecksPieGraphs type="Lubrificação" often ="week" dados={lubrifications} totais = {lubchecksItensTotal} />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12}>
+                    <Paper className={classes.paper}>
+                        <GraphsByEquip data={graphData} field={userData.user.field}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>

@@ -4,7 +4,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Title from "../ui/Title";
 import Typography from '@material-ui/core/Typography';
 import axios from "axios";
 import UserData from "../../contexts/UserData";
@@ -18,23 +17,29 @@ const useStyles = makeStyles({
   }
 });
 
-const ListaChecksRecentes = () => {
+const Criticidade = (props:any) => {
   const userData = useContext(UserData);
   const [rows, setRows] = useState<any[]>([]);
   const classes = useStyles()
-  
 
   useEffect(() => {
     axios
       .get(`checkmanip/criticidade?field=${userData.user.field}&kind=checks`)
       .then((response) => {
-        let data = response.data.sort((a:any, b:any)=>{
-         return ((b.done.realizados / b.wait.previstos) < (a.done.realizados / a.wait.previstos))
+        let data = response.data
+        data = data.sort((a:any,b:any) => {
+          if(a.done.realizados/a.wait.previstos > b.done.realizados/b.wait.previstos){
+            return 1;
+          }else if (a.done.realizados/a.wait.previstos < b.done.realizados/b.wait.previstos){
+            return -1
+          }else{
+            return 0
+          }
         })
         setRows(data);
+        props.data(data)
       });
-  }, [userData.user.field]);
-  console.log(rows)
+  }, []);
   return (
     <React.Fragment>
       <Typography align='center' component="h2" variant="h6" color="primary" gutterBottom>Relatório de Criticidade CIL</Typography>
@@ -63,4 +68,4 @@ const ListaChecksRecentes = () => {
   );
 };
 
-export default ListaChecksRecentes;
+export default Criticidade;
