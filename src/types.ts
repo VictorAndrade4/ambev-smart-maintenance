@@ -21,6 +21,7 @@ export interface LubMachine {
     link?: string;
     lublink?:string;
     layout?:string;
+    lineWasUp?: boolean
 }
 
 export interface Equipamento {
@@ -34,6 +35,7 @@ export interface Equipamento {
     frequency: number;
     period: string;
     link?: string;
+    lineWasUp?: boolean
 }
 export interface Operarios {
     _id: string;
@@ -55,6 +57,7 @@ export interface Check {
     period: string;
     link?: string;
     report?: string;
+    lineWasUp?: boolean;
 }
 
 export interface LubCheck {
@@ -68,6 +71,7 @@ export interface LubCheck {
     period: string;
     lublink?: string;
     report?: string;
+    lineWasUp?: boolean;
 }
 
 export interface CheckDashboardHome {
@@ -159,6 +163,7 @@ export interface LimpezaInspecaoInfo {
     field: string;
     machineName: string;
     report: string;
+    lineWasUp: boolean;
 }
 
 export interface LubrificacaoInfo {
@@ -170,6 +175,7 @@ export interface LubrificacaoInfo {
     field: string;
     machineName: string;
     report: string;
+    lineWasUp: boolean;
 }
 
 export interface ChecksAndItensTotais {

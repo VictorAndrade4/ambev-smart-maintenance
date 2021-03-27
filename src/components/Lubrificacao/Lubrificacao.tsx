@@ -41,6 +41,7 @@ const Lubrificacao = () => {
             field: userData.user.field || '',
             machineName: selectedLubMachine?.name || '',
             report: reportComments,
+            lineWasUp: (selectedLubMachine?.lineWasUp ? true : false)
         };
         axios
             .post('/lubrification/create', dados)
