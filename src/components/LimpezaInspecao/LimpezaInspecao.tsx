@@ -41,7 +41,7 @@ const LimpezaInspecao = () => {
             field: userData.user.field || '',
             machineName: selectedEquipamento?.name || '',
             report: reportComments,
-            lineWasUp: (selectedEquipamento?.lineWasUp ? true : false)
+            lineWasUp: (selectedEquipamento?.lineWasUp===false ? false : true)
         };
         axios
             .post('/check/create', dados)
